@@ -25,7 +25,8 @@ public class GUI extends JFrame {
     private JButton lanzar;
     private JPanel panelDados, panelResultados;
     private ImageIcon imagenDado;
-    private JTextArea resultados;
+    private JTextArea mensajesSalida, resultadosDados;
+    private JSeparator separator;
     private Escucha escucha;
     private ModelCraps modelCraps;
 
@@ -74,15 +75,22 @@ public class GUI extends JFrame {
 
         this.add(panelDados,BorderLayout.CENTER);
 
-        resultados = new JTextArea(7,31);
-        resultados.setText(MENSAJE_INICIO);
-        resultados.setBorder(BorderFactory.createTitledBorder("Que debes hacer "));
-        JScrollPane scroll = new JScrollPane(resultados);
+        mensajesSalida = new JTextArea(7,31);
+        mensajesSalida.setText(MENSAJE_INICIO);
+        //mensajesSalida.setBorder(BorderFactory.createTitledBorder("Que debes hacer "));
+        JScrollPane scroll = new JScrollPane(mensajesSalida);
 
-        this.add(scroll,BorderLayout.EAST);
+        panelResultados = new JPanel();
+        panelResultados.setBorder(BorderFactory.createTitledBorder("Que debes hacer "));
+        panelResultados.add(scroll);
+        panelResultados.setPreferredSize(new Dimension(370,180));
 
+        this.add(panelResultados,BorderLayout.EAST);
 
-
+        resultadosDados = new JTextArea(4,31);
+        separator = new JSeparator();
+        separator.setPreferredSize(new Dimension(320,7));
+        separator.setBackground(Color.BLUE);
     }
 
     /**
@@ -109,9 +117,18 @@ public class GUI extends JFrame {
             dado1.setIcon(imagenDado);
             imagenDado = new ImageIcon(getClass().getResource("/recursos/"+caras[1]+".png"));
             dado2.setIcon(imagenDado);
-
             modelCraps.determinarJuego();
-            resultados.setText(modelCraps.getEstadoToString());
+
+            panelResultados.removeAll();
+            panelResultados.setBorder(BorderFactory.createTitledBorder("Resultados "));
+            panelResultados.add(resultadosDados);
+            panelResultados.add(separator);
+            panelResultados.add(mensajesSalida);
+            resultadosDados.setText(modelCraps.getEstadoToString()[0]);
+            mensajesSalida.setRows(4);
+            mensajesSalida.setText(modelCraps.getEstadoToString()[1]);
+            revalidate();
+            repaint();
         }
     }
 }

@@ -29,7 +29,7 @@ public class ModelCraps {
     /**
      * Este metodo establece el valor del tiro, al valor de cada cara del dado.
      */
-    public void CalcularTiro(){
+    public void calcularTiro(){
         caras[0] = dado1.getCara();
         caras[1] = dado2.getCara();
         tiro = caras[0]+caras[1];
@@ -97,7 +97,7 @@ public class ModelCraps {
                     break;
             case 3: estadoToString="Estableciste punto en " +punto+
                                     " Debes seguir lanzando!!" +
-                                    "\n pero si sacas 7 antes que " +punto+ "perderas";
+                                    "\npero si sacas 7 antes que " +punto+ " perderas";
                     break;
             case 4: estadoToString="Volviste a sacar " +punto+ " ¡¡has ganado!!";
                     break;
